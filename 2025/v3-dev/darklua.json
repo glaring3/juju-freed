@@ -1,0 +1,20 @@
+{
+    "generator": "retain_lines",
+    "rules": [
+        "remove_comments",
+        "remove_types",
+        "remove_debug_profiling"
+    ],
+    "bundle": {
+        "require_mode": {
+            "name": "path",
+            "sources": {
+                "src": "./src",
+                "Experiences": "./src/Experiences",
+                "Loader": "./src/Loader",
+                "Menu": "./src/Menu",
+                "Shared": "./src/Shared"
+            }
+        }
+    }
+}

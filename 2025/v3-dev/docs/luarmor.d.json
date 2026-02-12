@@ -1,0 +1,58 @@
+{
+    "@luarmor/global/LRM_INIT_SCRIPT": {
+        "documentation": "## Warning\n\nYou **must** yield somewhere, even if it's just a `task.wait()` at the end. Otherwise, `script_key` will read as nil.\n\n## Description\n\nThis macro allows you to run a piece of code before your script is ran. It accepts a **constant** function.",
+        "learn_more_link": "https://luarmor.mintlify.app/scripting/macros#lrm-init-script",
+        "code_sample": "LRM_INIT_SCRIPT(function()\n    -- some code\n\n    -- wait for the user to put the key in or something\n    while HasUserCompleted == false do\n        -- but this wait is needed!! \n        task.wait()\n    end\nend)",
+        "params": [
+            {
+                "name": "f",
+                "type": "GenericFunction<T, U...>",
+                "documentation": "The function to run."
+            }
+        ],
+        "returns": [
+            "GenericFunction<T, U...>"
+        ]
+    },
+    "@luarmor/global/script_key": {
+        "documentation": "The script key used to execute the script, if one was provided."
+    },
+    "@luarmor/global/LRM_IsUserPremium": {
+        "documentation": "A `boolean` indicating if the user is premium or not. This is useful for FFA scripts ('freemium').\n\n## Note\n\nAd Reward keys are considered premium since a key was used to execute the script. Instead, you might want to check if `LRM_UserNote == \"Ad Reward\"`.",
+        "learn_more_link": "https://luarmor.mintlify.app/scripting/runtime-vars#lrm-isuserpremium"
+    },
+    "@luarmor/global/LRM_LinkedDiscordID": {
+        "documentation": "The linked Discord ID of the user.\n\n## Note\n\nThis is their ID, not username. You need to use some API to get their username.",
+        "learn_more_link": "https://luarmor.mintlify.app/scripting/runtime-vars#lrm-linkeddiscordid"
+    },
+    "@luarmor/global/LRM_ScriptName": {
+        "documentation": "The name of the current script.",
+        "learn_more_link": "https://luarmor.mintlify.app/scripting/runtime-vars#lrm-scriptname"
+    },
+    "@luarmor/global/LRM_TotalExecutions": {
+        "documentation": "The total executions from this `script_key`. It will be `0` by default.",
+        "learn_more_link": "https://luarmor.mintlify.app/scripting/runtime-vars#lrm-totalexecutions"
+    },
+    "@luarmor/global/LRM_SecondsLeft": {
+        "documentation": "The seconds left until expiry on this `script_key` from the time of execution. It will be `math.huge` if `auth_expire` isn't set.\n\n## Note\n\nThis does not update automatically.",
+        "learn_more_link": "https://luarmor.mintlify.app/scripting/runtime-vars#lrm-secondsleft"
+    },
+    "@luarmor/global/LRM_UserNote": {
+        "documentation": "The user note. It will be `Not specified` by default.",
+        "learn_more_link": "https://luarmor.mintlify.app/scripting/runtime-vars#lrm-usernote"
+    },
+    "@luarmor/global/LRM_ScriptVersion": {
+        "documentation": "The version of the script. It's in the format of `x.x.x.x` where `x` is a number. For example: `0.0.1.2`.",
+        "learn_more_link": "https://docs.luarmor.net/luarmor-user-manual-and-f.a.q#runtime-variables"
+    },
+    "@luarmor/global/LRM_SEND_WEBHOOK": {
+        "documentation": "Sends a webhook to the given discord webhook url with the given data.",
+        "learn_more_link": "https://docs.luarmor.net/webhook-protection#how-to-implement-it-in-your-script",
+        "code_sample": " LRM_SEND_WEBHOOK( \"https://discord.com/api/webhooks/......\", {\n        username = \"Cat Delivery\",\n        embeds = {\n            { \n              title = \"High bounty user detected!\",\n              description = \"Bounty: \" .. LRM_SANITIZE(bounty, \"[0-9]{1,6}\"),\n              color = 16711680, -- red\n              \n              fields = {\n                  {\n                      name = \"Player Name:\",\n                      value = LRM_SANITIZE(plrName, \"[a-zA-Z0-9_]{3,40}\"),\n                      inline = true\n                  },\n                  {\n                      name = \"Caught by:\",\n                      value = \"<@%DISCORD_ID%>\",\n                      inline = true\n                  }\n              }\n            }\n        }\n    });"
+    },
+    "@luarmor/global/LRM_SANITIZE": {
+        "documentation": "Sanitizes the given value of the webhook body with the given regex.",
+        "learn_more_link": "https://docs.luarmor.net/webhook-protection#how-to-implement-it-in-your-script",
+        "code_sample": "LRM_SANITIZE(\"Hello, world!\", \"^[a-zA-Z0-9]+$\")"
+    }
+}

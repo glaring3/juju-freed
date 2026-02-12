@@ -1,0 +1,3 @@
+local WindowManager = {}
+
+return WindowManager
